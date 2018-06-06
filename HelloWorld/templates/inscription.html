@@ -1,0 +1,23 @@
+{% extends "./base.html" %} 
+
+{% block mainbody %}
+    <form action="/insert_db" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Login" name="Login">
+        <input type="password" placeholder="Mot de passe" name="Mdp">
+        
+        <div class="Nom">
+            <label for="Nom">Nom:</label>
+            <input type="text" id="Nom" name="Nom" style="width:200px;" required="required">
+        </div>
+        <div class="Prenom">
+            <label for="Prenom">Prenon:</label>
+            <input type="text" id="Prenom" name="Prenom" style="width:200px;" required="required">
+        </div>
+        <div class="Email">
+                <label for="Email">Email:</label>
+                <input type="email" id="Email" name="Email"  style="width:200px;" required="required">
+        </div>
+        <input type="submit" value="S'inscrire">
+    </form>
+{% endblock %}

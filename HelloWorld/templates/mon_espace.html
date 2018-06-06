@@ -1,0 +1,116 @@
+{% extends "./base.html" %} 
+
+{% block pannel %}
+<script type="text/javascript">
+function afficherC(id){
+    $("div.function").hide();
+    document.getElementById(id).style.display='block';
+}
+</script>
+        <img id='profil' src="../static/img/logo.png">
+        <div id="accordion" class="panel_B">
+              <div class="card" id="panel_compte">
+                <div class="card-header">
+                  <a class="card-link B" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    Gerer mon compte
+                  </a>
+                </div>
+                <div id="collapseOne" class="collapse">
+                  <div class="card-block">
+                      <a class="B" href="#mes_info" onclick="afficherC('mes_info');">Mes info</a></br>
+                      <a class="B" href="#modifier" onclick="afficherC('modifier');">Modifier</a><br>
+                      <a class="B" href="http://127.0.0.1:8000/">Log out</a>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="card" id="panel_histoire">
+                <div class="card-header">
+                  <a class="collapsed card-link B" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                  Function B
+                </a>
+                </div>
+                <div id="collapseTwo" class="collapse">
+                  <div class="card-block">
+                    collapseTwo
+                  </div>
+                </div>
+              </div>
+    
+              <div class="card" id="panel_setting">
+                <div class="card-header">
+                  <a class="collapsed card-link B" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                    Function C
+                  </a>
+                </div>
+                <div id="collapseThree" class="collapse">
+                  <div class="card-block">
+                    collapseThree
+                  </div>
+                </div>
+              </div>
+          </div>
+{% endblock %}
+
+
+{% block mainbody %}
+<p>heritage par ./base.html</p>
+<h1>{{hello}}</h1>
+<h2>Mon espace</h2>
+
+    <div id="mes_info" class="function" style="display: none;">
+    <ul>
+        {% for key,value in ctx.items %}
+            <li>{{key}} : {{value}}</li>
+        {% endfor %}
+    </ul>
+    </div>
+
+    <div id="modifier" class="function" style="display: none;">
+    <form class="form-horizontal">
+    {% csrf_token %}
+        <h1>Ce div est pour modifier</h1>
+
+        <ul>
+            {% for key,value in ctx.items %}
+                {% ifequal key 'mel' %}
+                    <li>{{key}} : <input type="email" id="mel" name="mel" style="width:200px;" placeholder="{{value}}" required="required"></li>
+                {% else %}
+                    <input type="hidden" id="{{key}}" name="{{key}}" value="{{value}}">
+                    <li>{{key}} : {{value}}</li>
+                {% endifequal %}    
+            {% endfor %}
+        </ul>
+        
+        <input type="button" class="btn btn-success btn-lg btn-block" value="Enregistrer" id="ajax_submit">
+    </form>
+    </div>
+{% endblock %}
+
+{% block fin %}
+<script>
+
+    $("#ajax_submit").click(function() {
+            alert("New email_adresse:"+$("#mel").val());
+        $.ajax({
+            url: "/test_ajax",
+            type: "POST",
+            data: {
+                "login": $("#login").val(),
+                "mdp": $("#mdp").val(),
+                "mel": $("#mel").val(),
+                "k1": "参数1", 
+                "k2": "参数2"
+            },
+            headers:{"X-CSRFToken":$('[name="csrfmiddlewaretoken"]').val()},
+            success: function (data1) {
+                alert(data1);
+                //data1 retuned by server
+            }
+        })
+    })
+</script>
+{% endblock %}
+
+
+
