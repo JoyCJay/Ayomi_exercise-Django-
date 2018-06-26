@@ -1,7 +1,7 @@
 {% extends "./base.html" %} 
 
 {% block mainbody %}
-    <form action="/insert_db" method="post">
+    <form action="/insc_index" method="post">
         {% csrf_token %}
         <input type="text" placeholder="Login" name="Login">
         <input type="password" placeholder="Mot de passe" name="Mdp">

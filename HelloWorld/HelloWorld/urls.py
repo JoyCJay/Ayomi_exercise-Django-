@@ -25,16 +25,16 @@ urlpatterns = [
 from django.conf.urls import include, url
  
 import view
-import inscription
+
+user1 = view.User("id", "mot de passe")
  
 urlpatterns = [
     url(r'^$', view.hello),
-    url(r'^inscription$', inscription.inscription_form),
-    url(r'^insert_db$', inscription.inscription_post2),
-    url(r'^mon_espace$', view.sign_in),
-
+    url(r'^inscription$', user1.inscription_form),
+    url(r'^insc_index$', user1.inscription_DB),
+    url(r'^mon_espace$', user1.sign_in),
     url(r'^test_ajax$', view.ajax_submit),
 
-    url(r'^show_login$', inscription.show_Login),
-    url(r'^delete_login$', inscription.delete_Login),
+    url(r'^show_login$', view.show_Login),
+    url(r'^delete_login$', view.delete_Login),
 ]
