@@ -38,11 +38,4 @@ Auteur: ZHANG Chengjie
 Contact: chengjie.zhang@utt.fr
 Date: le 6 Juin 2018
 Remarque:
-C'est ma première fois d'utiliser django. C'est juste un demo simple fini dans 1 jour(effectivement 8 heures). Dans ces 8 heures, je fais:
--Installation/Configuration de l'environement
--Apprentisage de Django
--Lire le sujet et concevoir
--Développement
--Refactoring
--Ergonomie
--Documentation
+C'est ma première fois d'utiliser django. C'est juste un demo simple fini dans 1 jour(effectivement 8 heures).
